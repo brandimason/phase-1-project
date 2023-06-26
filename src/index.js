@@ -26,6 +26,7 @@ fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
 }
 
 function init(recipeData) {
+    let favorited = false //defines the default state of the favorite button
     recipeInfo = recipeData.meals[0]
     recipeName = (recipeInfo.strMeal)
     h1recipeName = document.querySelector('#recipeTitle')
@@ -60,5 +61,14 @@ function init(recipeData) {
             }
         }
         listIngredients(ingredientsKeys)
+
+    
+        const favoriteButton = document.querySelector('#favorite')
+        favoriteButton.addEventListener('click', () => {
+            favorited = !favorited
+            favorited === true ? favoriteButton.textContent = "❤️" : favoriteButton.textContent = "♡"
+            //**extra: append data to the favorites
+        })
+
+    }
        
-}

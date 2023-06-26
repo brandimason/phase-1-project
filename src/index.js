@@ -1,5 +1,10 @@
+const searchBar = document.querySelector('#searchbar')
+searchBar.addEventListener('submit', (e) => {
+    e.preventDefault()
+    recipe = e.target[0].value
+})
 
-let recipe = 'taco'
+let recipe = 'pie'
 const ingredientList = document.getElementById('ingredientlist')
 console.log(ingredientList)
 fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)

@@ -1,20 +1,29 @@
-function getRecipe() {
-    let recipe = 'fish'
-    const searchBar = document.querySelector('#searchbar')
-    searchBar.addEventListener('submit', (e) => {
-    const searchInput = document.querySelector('input[name="search"]')
-    const searchText = searchInput.value
-    e.preventDefault()
-    recipe.textContent = searchInput.value
-    })
-}
-getRecipe()
-
 const ingredientList = document.getElementById('ingredientlist')
-// console.log(ingredientList)
+
+let recipe = 'pie'
+const searchBar = document.querySelector('#searchbar')
+let searchInfo = document.querySelector('#search-info')
+    searchBar.addEventListener('submit', (e) => {
+        e.preventDefault()
+    recipe = searchInfo.value
+    console.log(recipe)
+    function removeOld(element) {
+        while (element.firstChild) {
+            console.log(element.firstChild)
+            element.removeChild(element.firstChild)
+        }
+    }
+    removeOld(ingredientList)
+    fetchFunction(recipe)
+    })
+
+
+function fetchFunction(recipe) {
+//console.log(ingredientList)
 fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
     .then(res => res.json())
     .then (data => init(data))
+}
 
 function init(recipeData) {
     recipeInfo = recipeData.meals[0]

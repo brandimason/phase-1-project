@@ -1,0 +1,24 @@
+{
+    "recipe" : [
+        {
+            "id" : 1,
+            "dish" : "lasagna",
+            "recipe" : "example lasagna recipe"
+        },
+        {
+            "id" : 2,
+            "dish" : "carbonara",
+            "recipe" : "example carbonara recipe"
+        },
+        {
+            "id" : 3,
+            "dish" : "stir fry",
+            "recipe" : "example stir fry recipe"
+        },
+        {
+            "id" : 4,
+            "dish" : "sesame chicken",
+            "recipe" : "example sesame chicken recipe"
+        }
+    ]
+}

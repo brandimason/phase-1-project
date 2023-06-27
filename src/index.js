@@ -13,6 +13,9 @@ favoriteButton.addEventListener('click', () => {
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
 let searchInfo = document.querySelector('#search-info')
+    submitButton.addEventListener('click', () =>{
+    submitButton.style.backgroundColor = "blue"
+    })
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
         

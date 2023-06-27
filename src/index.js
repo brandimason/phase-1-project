@@ -1,6 +1,6 @@
 const ingredientList = document.getElementById('ingredientlist')
 const instructions = document.getElementById('instructions')
-let recipeInfo
+// let recipeInfo
 // let
 
 
@@ -101,9 +101,9 @@ function init(recipeData) {
             addToFavorites()
             //**extra: append data to the favorites
         })
-    function addToFavorites() {
+    // function addToFavorites() {
 
-    }
+    // }
 
     }
        

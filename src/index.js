@@ -1,23 +1,33 @@
 const ingredientList = document.getElementById('ingredientlist')
-// const recipeInfo = document.
-// const recipeName = 
-// const recipeImg =
 
-let recipe = 'pie'
+
+// let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
+const submitButton = searchBar.querySelector('.button')
 let searchInfo = document.querySelector('#search-info')
+    submitButton.addEventListener('mouseover', () =>{
+        submitButton.style.backgroundColor = "yellow"
+        
+    })
+    submitButton.addEventListener('mouseleave', () =>{
+        submitButton.style.backgroundColor = ""
+        
+    })
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
     recipe = searchInfo.value
-    // console.log(recipe)
+    console.log(recipe)
     function removeOld(element) {
         while (element.firstChild) {
-            console.log(element.firstChild)
             element.removeChild(element.firstChild)
+            }
+        while (element2.firstChild) {
+            element2.removeChild(element2.firstChild)
+            }
+    
         }
-    }
-    removeOld(ingredientList)
-    fetchFunction(recipe)
+        removeOld(ingredientList, instructions)
+        fetchFunction(recipe)
     })
 
 // search for receipes
@@ -41,6 +51,10 @@ function init(recipeData) {
     recipeImage = (recipeInfo.strMealThumb)
     mainimg = document.querySelector('#mainimg')
     mainimg.src = recipeImage
+    mainimg.addEventListener('mouseover', () => {
+        mainimg.with= "400"
+
+    })
 //    console.log(recipeInfo["strIngredient1"])
     let ingredientsKeys = []
     function ingredientsLister(recipeInfo) {
@@ -67,14 +81,26 @@ function init(recipeData) {
             }
         }
         listIngredients(ingredientsKeys)
+    function listInstructions (recipeInfo){
+      const pInstructions = document.createElement('p')
+        pInstructions.textContent = recipeInfo.strInstructions
+        instructions.appendChild(pInstructions)
+        console.log(instructions)
+
+    }
+   console.log (listInstructions(recipeInfo))
 
     
         const favoriteButton = document.querySelector('#favorite')
         favoriteButton.addEventListener('click', () => {
             favorited = !favorited
             favorited === true ? favoriteButton.textContent = "❤️" : favoriteButton.textContent = "♡"
+            addToFavorites()
             //**extra: append data to the favorites
         })
+    function addToFavorites() {
+
+    }
 
     }
        

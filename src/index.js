@@ -3,6 +3,9 @@ let recipeName
 let recipeImage
 let instructions = document.querySelector("#instructions") 
 
+
+
+
 // let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
@@ -28,8 +31,13 @@ let searchInfo = document.querySelector('#search-info')
             }
     
         }
+        const favoriteButton = document.querySelector('#favorite')
+        favoriteButton.textContent = "♡"
+        favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
+        
+
     })
 
 
@@ -41,7 +49,7 @@ fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
 }
 
 function init(recipeData) {
-    let favorited = false //defines the default state of the favorite button
+     //defines the default state of the favorite button
     recipeInfo = recipeData.meals[0]
     recipeName = (recipeInfo.strMeal)
     const h1recipeName = document.querySelector('#recipeTitle')
@@ -80,6 +88,7 @@ function init(recipeData) {
             }
         }
         listIngredients(ingredientsKeys)
+
     function listInstructions (recipeInfo){
       const pInstructions = document.createElement('p')
         pInstructions.textContent = recipeInfo.strInstructions
@@ -87,28 +96,39 @@ function init(recipeData) {
         // console.log(instructions)
 
     }
-    listInstructions(recipeInfo)
+        listInstructions(recipeInfo)
 //    console.log (listInstructions(recipeInfo))
 
     
-        const favoriteButton = document.querySelector('#favorite')
+        
+favoriteButton = document.querySelector('#favorite')
         favoriteButton.addEventListener('click', () => {
             favorited = !favorited
-            favorited === true ? favoriteButton.textContent = "❤️" : favoriteButton.textContent = "♡"
+            if (favorited === true) {
+                favoriteButton.textContent = "❤️"
+            }
+            if (favorited === true){
             addToFavorites()
-            //**extra: append data to the favorites
+            }
+            
+
         })
-    function addToFavorites() {
-        let favoriteSection = document.querySelector('.favorites_bar')
-        let favoriteTitle = document.createElement('p')
-        favoriteTitle.textContent = recipeName
-        favoriteSection.appendChild(favoriteTitle)
-        // console.log(favoriteSection)
-        let favoriteImage = document.createElement('img')
-        favoriteImage.style.width = "150px";
-        favoriteImage.src = recipeImage
-        favoriteSection.appendChild(favoriteImage)
+        function addToFavorites() {
+             
+            let favoriteSection = document.querySelector('.favorites_bar')
+            let favoriteTitle = document.createElement('p')
+            favoriteTitle.textContent = recipeName
+            favoriteSection.appendChild(favoriteTitle)
+            // console.log(favoriteSection)
+            let favoriteImage = document.createElement('img')
+            favoriteImage.style.width = "150px";
+            favoriteImage.src = recipeImage
+            favoriteSection.appendChild(favoriteImage)
+    
+            console.log(favoriteSection)
+        }
+        
+        
     }
 
-    }
        

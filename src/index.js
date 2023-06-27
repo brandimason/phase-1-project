@@ -101,9 +101,9 @@ function init(recipeData) {
             addToFavorites()
             //**extra: append data to the favorites
         })
-    // function addToFavorites() {
+    function addToFavorites() {
 
-    // }
+    }
 
     }
        

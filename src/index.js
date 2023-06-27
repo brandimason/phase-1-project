@@ -1,5 +1,6 @@
 const ingredientList = document.getElementById('ingredientlist')
 
+
 let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 let searchInfo = document.querySelector('#search-info')

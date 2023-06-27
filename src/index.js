@@ -2,6 +2,9 @@ const ingredientList = document.getElementById('ingredientlist')
 let recipeName
 let recipeImage
 let instructions = document.querySelector("#instructions") 
+const favoriteButton = document.querySelector('#favorite')
+favoriteButton.addEventListener('click', () => {
+    addToFavorites()})
 
 
 
@@ -31,7 +34,6 @@ let searchInfo = document.querySelector('#search-info')
             }
     
         }
-        const favoriteButton = document.querySelector('#favorite')
         favoriteButton.textContent = "♡"
         favorited = false
         removeOld(ingredientList, instructions)
@@ -101,34 +103,27 @@ function init(recipeData) {
 
     
         
-favoriteButton = document.querySelector('#favorite')
-        favoriteButton.addEventListener('click', () => {
+
+       
+            
+        }
+        function addToFavorites() {
+            
             favorited = !favorited
             if (favorited === true) {
                 favoriteButton.textContent = "❤️"
             }
-            if (favorited === true){
-            addToFavorites()
-            }
-            
-
-        })
-        function addToFavorites() {
-             
             let favoriteSection = document.querySelector('.favorites_bar')
             let favoriteTitle = document.createElement('p')
             favoriteTitle.textContent = recipeName
-            favoriteSection.appendChild(favoriteTitle)
-            // console.log(favoriteSection)
+            // favoriteSection.appendChild(favoriteTitle)
             let favoriteImage = document.createElement('img')
             favoriteImage.style.width = "150px";
             favoriteImage.src = recipeImage
-            favoriteSection.appendChild(favoriteImage)
+            favoriteSection.append(favoriteImage, favoriteTitle)
     
-            console.log(favoriteSection)
+            
         }
-        
-        
-    }
+    
 
        

@@ -1,5 +1,7 @@
 const ingredientList = document.getElementById('ingredientlist')
-
+// const recipeInfo = document.
+// const recipeName = 
+// const recipeImg =
 
 let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
@@ -7,7 +9,7 @@ let searchInfo = document.querySelector('#search-info')
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
     recipe = searchInfo.value
-    console.log(recipe)
+    // console.log(recipe)
     function removeOld(element) {
         while (element.firstChild) {
             console.log(element.firstChild)
@@ -33,7 +35,7 @@ function init(recipeData) {
     let favorited = false //defines the default state of the favorite button
     recipeInfo = recipeData.meals[0]
     recipeName = (recipeInfo.strMeal)
-    h1recipeName = document.querySelector('#recipeTitle')
+    const h1recipeName = document.querySelector('#recipeTitle')
     h1recipeName.textContent = recipeName
 
     recipeImage = (recipeInfo.strMealThumb)

@@ -3,6 +3,7 @@ const instructions = document.getElementById('instructions')
 let recipeInfo
 let
 
+
 let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('.button')
@@ -32,6 +33,9 @@ let searchInfo = document.querySelector('#search-info')
         fetchFunction(recipe)
     })
 
+// search for receipes
+// show the recipe ingredients 
+// show the recipe instructions
 
 function fetchFunction(recipe) {
 //console.log(ingredientList)

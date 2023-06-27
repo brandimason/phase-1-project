@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8"> MIGHT NOT NEED -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Recipes Website</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
-    <div class="search-container">
 
-      <section class = "header">
-         <div class="container">
-            <h1>Recipes Onatile</h1>
+  <body>
+    <div class="container">
+      <!-- <section class = "header"> MIGHT NOT NEED -->
+         <div class="search-container">
+            <!-- <h1>RECIPES</h1> MIGHT NOT NEED -->
             <form id="searchbar">
             <input id='search-info' type ="text" placeholder= "Find a recipe" name="search">
-            <button type="submit" class="button">Search</button>
+            <button id="search-btn" type="submit">Search</button>
+            <div id="result"></div>
             </form>
     
   
-    <section class="maintile">
+    <!-- <section class="maintile"> -->
       <div class = "maintile">
         <h1 id="recipeTitle">Search a Recipe!</h1>
-        <img id="mainimg" src ="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg" alt="This is a dish" width ="200" height ="200"/>
+        <img id="mainimg" src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg" alt="This is a dish" width ="200" height ="200"/>
           <div class="ingredient list"> Ingredients
             <button id="favorite">♡</button>
             <ul id="ingredientlist">
@@ -52,7 +56,7 @@
             <p class="fave">Pick a Favorite!</p>
           </div>
         </div>
-  </section>
+  <!-- </section> -->
      <script defer type="text/javascript" src="src/index.js"></script>
   </body>
 </html>

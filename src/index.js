@@ -4,6 +4,8 @@ let recipeImage
 let instructions = document.querySelector("#instructions") 
 
 
+
+
 // let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
@@ -29,10 +31,11 @@ let searchInfo = document.querySelector('#search-info')
             }
     
         }
+        const favoriteButton = document.querySelector('#favorite')
+        favoriteButton.textContent = "♡"
+        favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
-        
-        resetFavorites(favorited)
         
 
     })
@@ -85,6 +88,7 @@ function init(recipeData) {
             }
         }
         listIngredients(ingredientsKeys)
+
     function listInstructions (recipeInfo){
       const pInstructions = document.createElement('p')
         pInstructions.textContent = recipeInfo.strInstructions
@@ -92,18 +96,19 @@ function init(recipeData) {
         // console.log(instructions)
 
     }
-    listInstructions(recipeInfo)
+        listInstructions(recipeInfo)
 //    console.log (listInstructions(recipeInfo))
 
     
-        const favoriteButton = document.querySelector('#favorite')
-        let favorited = false
+        
+favoriteButton = document.querySelector('#favorite')
         favoriteButton.addEventListener('click', () => {
             favorited = !favorited
-            favorited === true ? favoriteButton.textContent = "❤️" : favoriteButton.textContent = "♡"
+            if (favorited === true) {
+                favoriteButton.textContent = "❤️"
+            }
             if (favorited === true){
             addToFavorites()
-            
             }
             
 

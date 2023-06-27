@@ -1,6 +1,7 @@
 const ingredientList = document.getElementById('ingredientlist')
 const instructions = document.getElementById('instructions')
 let recipeInfo
+let
 
 let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
@@ -89,8 +90,12 @@ function init(recipeData) {
         favoriteButton.addEventListener('click', () => {
             favorited = !favorited
             favorited === true ? favoriteButton.textContent = "❤️" : favoriteButton.textContent = "♡"
+            addToFavorites()
             //**extra: append data to the favorites
         })
+    function addToFavorites() {
+
+    }
 
     }
        

@@ -1,4 +1,6 @@
 const ingredientList = document.getElementById('ingredientlist')
+const instructions = document.getElementById('instructions')
+let recipeInfo
 
 let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
@@ -7,14 +9,17 @@ let searchInfo = document.querySelector('#search-info')
         e.preventDefault()
     recipe = searchInfo.value
     console.log(recipe)
-    function removeOld(element) {
+    function removeOld(element, element2) {
         while (element.firstChild) {
-            console.log(element.firstChild)
             element.removeChild(element.firstChild)
+            }
+        while (element2.firstChild) {
+            element2.removeChild(element2.firstChild)
+            }
+    
         }
-    }
-    removeOld(ingredientList)
-    fetchFunction(recipe)
+        removeOld(ingredientList, instructions)
+        fetchFunction(recipe)
     })
 
 
@@ -61,6 +66,14 @@ function init(recipeData) {
             }
         }
         listIngredients(ingredientsKeys)
+    function listInstructions (recipeInfo){
+      const pInstructions = document.createElement('p')
+        pInstructions.textContent = recipeInfo.strInstructions
+        instructions.appendChild(pInstructions)
+        console.log(instructions)
+
+    }
+   console.log (listInstructions(recipeInfo))
 
     
         const favoriteButton = document.querySelector('#favorite')

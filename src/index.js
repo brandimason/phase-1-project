@@ -98,12 +98,13 @@ function init(recipeData) {
         favoriteButton.addEventListener('click', () => {
             favorited = !favorited
             favorited === true ? favoriteButton.textContent = "❤️" : favoriteButton.textContent = "♡"
-            addToFavorites()
-            //**extra: append data to the favorites
-        })
-    function addToFavorites() {
+    //         addToFavorites()
+    //         //**extra: append data to the favorites
+    //     })
+    // function addToFavorites() {
 
-    }
+    // }
 
-    }
+    })
+}
        

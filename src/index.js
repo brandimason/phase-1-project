@@ -50,6 +50,10 @@ function init(recipeData) {
     recipeImage = (recipeInfo.strMealThumb)
     mainimg = document.querySelector('#mainimg')
     mainimg.src = recipeImage
+    mainimg.addEventListener('mouseover', () => {
+        mainimg.with= "400"
+
+    })
 //    console.log(recipeInfo["strIngredient1"])
     let ingredientsKeys = []
     function ingredientsLister(recipeInfo) {

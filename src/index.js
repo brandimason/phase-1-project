@@ -1,10 +1,10 @@
 const ingredientList = document.getElementById('ingredientlist')
 const instructions = document.getElementById('instructions')
 let recipeInfo
-let
+// let
 
 
-let recipe = 'pie'
+// let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('.button')
 let searchInfo = document.querySelector('#search-info')

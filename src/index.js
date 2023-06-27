@@ -1,9 +1,11 @@
 const ingredientList = document.getElementById('ingredientlist')
-
+let recipeName
+let recipeImage
+let instructions = document.querySelector("#instructions") 
 
 // let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
-const submitButton = searchBar.querySelector('.button')
+const submitButton = searchBar.querySelector('#search-btn')
 let searchInfo = document.querySelector('#search-info')
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
@@ -16,8 +18,8 @@ let searchInfo = document.querySelector('#search-info')
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
     recipe = searchInfo.value
-    console.log(recipe)
-    function removeOld(element) {
+    // console.log(recipe)
+    function removeOld(element, element2) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
             }
@@ -30,9 +32,6 @@ let searchInfo = document.querySelector('#search-info')
         fetchFunction(recipe)
     })
 
-// search for receipes
-// show the recipe ingredients 
-// show the recipe instructions
 
 function fetchFunction(recipe) {
 //console.log(ingredientList)
@@ -85,10 +84,11 @@ function init(recipeData) {
       const pInstructions = document.createElement('p')
         pInstructions.textContent = recipeInfo.strInstructions
         instructions.appendChild(pInstructions)
-        console.log(instructions)
+        // console.log(instructions)
 
     }
-   console.log (listInstructions(recipeInfo))
+    listInstructions(recipeInfo)
+//    console.log (listInstructions(recipeInfo))
 
     
         const favoriteButton = document.querySelector('#favorite')
@@ -99,7 +99,15 @@ function init(recipeData) {
             //**extra: append data to the favorites
         })
     function addToFavorites() {
-
+        let favoriteSection = document.querySelector('.favorites_bar')
+        let favoriteTitle = document.createElement('p')
+        favoriteTitle.textContent = recipeName
+        favoriteSection.appendChild(favoriteTitle)
+        // console.log(favoriteSection)
+        let favoriteImage = document.createElement('img')
+        favoriteImage.style.width = "150px";
+        favoriteImage.src = recipeImage
+        favoriteSection.appendChild(favoriteImage)
     }
 
     }

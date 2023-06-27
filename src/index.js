@@ -4,12 +4,21 @@ let recipeInfo
 
 let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
+const submitButton = searchBar.querySelector('.button')
 let searchInfo = document.querySelector('#search-info')
+    submitButton.addEventListener('mouseover', () =>{
+        submitButton.style.backgroundColor = "yellow"
+        
+    })
+    submitButton.addEventListener('mouseleave', () =>{
+        submitButton.style.backgroundColor = ""
+        
+    })
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
-    recipe = searchInfo.value
-    console.log(recipe)
-    function removeOld(element, element2) {
+        recipe = searchInfo.value
+        console.log(recipe)
+        function removeOld(element, element2) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
             }

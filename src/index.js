@@ -2,17 +2,9 @@ const ingredientList = document.getElementById('ingredientlist')
 let recipeName
 let recipeImage
 let instructions = document.querySelector("#instructions") 
-const favoriteButton = document.querySelector('#favorite')
-favoriteButton.addEventListener('click', () => {
-    addToFavorites()})
 
+// i want the ingredient header to appear after the search button is clicked
 
-
-
-// let recipe = 'pie'
-const searchBar = document.querySelector('#searchbar')
-const submitButton = searchBar.querySelector('#search-btn')
-let searchInfo = document.querySelector('#search-info')
     submitButton.addEventListener('click', () =>{
     submitButton.style.backgroundColor = "blue"
     })
@@ -26,7 +18,7 @@ let searchInfo = document.querySelector('#search-info')
     })
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
-    recipe = searchInfo.value
+    recipe = searchInput.value
     // console.log(recipe)
     function removeOld(element, element2) {
         while (element.firstChild) {
@@ -65,6 +57,8 @@ function fetchRandomRecipe(){
 
 function preprocessData(recipeData){
     const substitution = document.querySelector('#substitution');
+    ingredientHeader.textContent = "Ingredients"
+    instructionHeader.textContent = "Instructions"
     if (recipeData.meals === null) {
         substitution.textContent = "This item is not available, here is a random recipe for you!";
     

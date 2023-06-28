@@ -5,7 +5,8 @@
     font-family: "Poppins", sans-serif;
 }
 body{
-    background-color: #48D1CC;
+    /* background-color: #48D1CC; */
+    background-image: url("https://static01.nyt.com/images/2021/07/08/science/08TB-CAULIFLOWER-promo/08TB-CAULIFLOWER-promo-videoSixteenByNine3000.jpg?year=2021&h=1688&w=3000&s=310ed83bd4dd98d6b80f3f302706c570837eec0f057542540194e9e77089e8a2&k=ZQJBKqZ0VN&tw=1");
 }
 
 .container{
@@ -36,7 +37,7 @@ body{
 
 .search-container button {
     font-size: 1em;
-    background-color: #B0E0E6;
+    background-color: #DCDCDC;
     border: none;
     font-weight: 500;
     border-radius: 0.3em;
@@ -55,7 +56,7 @@ ul {
 
 .maintile button {
     font-size: 1em;
-    background-color: #B0E0E6;
+    background-color: #ffffff;
     border: none;
     font-weight: 500;
     border-radius: 0.3em;

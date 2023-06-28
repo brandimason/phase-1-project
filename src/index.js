@@ -1,21 +1,24 @@
-//variables
-let recipeName
-let recipeImage
-const instructions = document.querySelector("#instructions") 
-const favoriteButton = document.querySelector('#favorite')
-const searchBar = document.querySelector('#searchbar')
-const submitButton = searchBar.querySelector('#search-btn')
-const searchInput = document.querySelector('#search-input')
- 
+let recipeName;
+let recipeImage;
+const instructions = document.querySelector("#instructions");
+const favoriteButton = document.querySelector('#favorite');
+const searchBar = document.querySelector('#searchbar');
+const submitButton = searchBar.querySelector('#search-btn');
+const searchInput = document.querySelector('#search-input');
+const ingredientList = document.querySelector ('#ingredient_list');
+const ingredientHeader = document.querySelector('#ingredient_header');
+const instructionHeader = document.querySelector('#instructions_header');
 
-//event listeners
-favoriteButton.addEventListener('click', () => {
+    
+    favoriteButton.addEventListener('click', () =>{
     addToFavorites()
-})
+    })
+    //not sure if this is working or not
 
-submitButton.addEventListener('click', () =>{
+    submitButton.addEventListener('click', () =>{
         submitButton.style.backgroundColor = "blue"
-})
+    })
+    //when the search button is clicked, it turns blue
 
 submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"

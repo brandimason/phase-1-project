@@ -1,15 +1,21 @@
-const ingredientList = document.getElementById('ingredientlist');
-let recipeName;
-let recipeImage;
-let instructions = document.querySelector("#instructions");
-const searchBar = document.querySelector('#searchbar');
-const submitButton = searchBar.querySelector('#search-btn');
-let searchInput = document.querySelector('#search-input');
-const ingredientHeader = document.querySelector('#ingredient_header');
-const instructionHeader = document.querySelector('#instructions_header');
-// const displayFavoriteButton = document.querySelector('#')
+let recipeName
+let recipeImage
+let instructions = document.querySelector("#instructions") 
+const favoriteButton = document.querySelector('#favorite')
+favoriteButton.addEventListener('click', () => {
+    addToFavorites()})
 
-// i want the ingredient header to appear after the search button is clicked
+
+
+
+// let recipe = 'pie'
+const searchBar = document.querySelector('#searchbar')
+const submitButton = searchBar.querySelector('#search-btn')
+let searchInfo = document.querySelector('#search-info')
+    submitButton.addEventListener('click', () =>{
+    submitButton.style.backgroundColor = "blue"
+    })
+
 
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
@@ -32,27 +38,29 @@ const instructionHeader = document.querySelector('#instructions_header');
             }
     
         }
-        const favoriteButton = document.querySelector('#favorite')
         favoriteButton.textContent = "♡"
         favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
         
+        
 
     })
 
 
+
 function fetchFunction(recipe) {
 //console.log(ingredientList)
-fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
-    .then(res => res.json())
-    .then (data => preprocessData(data))
+    fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
+        .then(res => res.json())
+        .then (data => preprocessData(data))
 }
 
 function fetchRandomRecipe(){
-fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-    .then(res => res.json())
-    .then(allRandomRecipes => init(allRandomRecipes.meals[0]))
+    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+        .then(res => res.json())
+        .then(allRandomRecipes => init(allRandomRecipes.meals[0]))
+
 }
 
 
@@ -74,23 +82,29 @@ function preprocessData(recipeData){
 function displayFirstTenRecipeNames(recipeData){
     removeAllChildNodes(document.querySelector("#myList"));
     for (i = 0; i < Math.min(recipeData.meals.length, 10); i++) {
-        console.log(recipeData.meals[i]);
+        (recipeData.meals[i]);
         const node = document.createElement("li");
         node.setAttribute('idx', i.toString());
         node.addEventListener('click', ()=> {
-            console.log(node.getAttribute("idx"));
+            (node.getAttribute("idx"));
             init(recipeData.meals[parseInt(node.getAttribute("idx"))]);
+            favoriteButton.textContent = "♡"
+        favorited = false
         })
         const textnode = document.createTextNode(recipeData.meals[i].strMeal);
         node.appendChild(textnode);
         document.getElementById("myList").appendChild(node);
+        
     }
 
 }
+ 
+
 
 function init(recipeInfo) {
      //defines the default state of the favorite button   
     recipeName = recipeInfo.strMeal
+    recipeCategory = recipeInfo.strCategory
     const h1recipeName = document.querySelector('#recipeTitle')
     h1recipeName.textContent = recipeName
 
@@ -98,9 +112,32 @@ function init(recipeInfo) {
     mainimg = document.querySelector('#mainimg')
     mainimg.src = recipeImage
     mainimg.addEventListener('mouseover', () => {
-        mainimg.with= "400"
-
+        mainimg.style.width= "400"
+        fetchCategory()
+        matchCategory(recipeCategory)
+    
     })
+    function fetchCategory() {
+        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+            .then(res => res.json())
+            .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList)))
+                
+        }
+        function matchCategory(categoryList, recipeCategory){
+            // allCategories.categories.forEach(category => console.log(category))
+            console.log(recipeCategory)
+            console.log(categoryList)
+        //  const match = category.find(categoryList.strCategory => category === recipeCategory)
+         categoryDescriptionValue = match.strCategory
+         categoryDescription = document.createElement('p')
+         categoryDescripton.textContent = categoryDescriptionValue
+         categoryDiv = document.querySelector('#descripton')
+         categoryDiv.appendChild(categoryDescription)
+        
+        }
+    
+    
+    
 //    console.log(recipeInfo["strIngredient1"])
     let ingredientsKeys = []
     function ingredientsLister(recipeInfo) {
@@ -112,8 +149,10 @@ function init(recipeInfo) {
             //   console.log(ingredientsKeys)
             }
         }
+        
     
     ingredientsLister(recipeInfo)
+
 
     // console.log(ingredientsKeys)
     function listIngredients(ingredientsKeys) {
@@ -138,39 +177,28 @@ function init(recipeInfo) {
 
     }
         listInstructions(recipeInfo)
+}
 //    console.log (listInstructions(recipeInfo))
 
     
-        
-favoriteButton = document.querySelector('#favorite')
-        favoriteButton.addEventListener('click', () => {
+        function addToFavorites() {
+            
             favorited = !favorited
             if (favorited === true) {
                 favoriteButton.textContent = "❤️"
             }
-            if (favorited === true){
-            addToFavorites()
-            }
-            
-
-        })
-        function addToFavorites() {
-             
             let favoriteSection = document.querySelector('.favorites_bar')
             let favoriteTitle = document.createElement('p')
             favoriteTitle.textContent = recipeName
-            favoriteSection.appendChild(favoriteTitle)
-            // console.log(favoriteSection)
+            // favoriteSection.appendChild(favoriteTitle)
             let favoriteImage = document.createElement('img')
             favoriteImage.style.width = "150px";
             favoriteImage.src = recipeImage
-            favoriteSection.appendChild(favoriteImage)
+            favoriteSection.append(favoriteImage, favoriteTitle)
     
-            console.log(favoriteSection)
+            
         }
-        
-        
-    }
+    
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {

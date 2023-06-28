@@ -1,15 +1,16 @@
-const ingredientList = document.getElementById('ingredientlist')
-let recipeName
-let recipeImage
-let instructions = document.querySelector("#instructions") 
+const ingredientList = document.getElementById('ingredientlist');
+let recipeName;
+let recipeImage;
+let instructions = document.querySelector("#instructions");
+const searchBar = document.querySelector('#searchbar');
+const submitButton = searchBar.querySelector('#search-btn');
+let searchInput = document.querySelector('#search-input');
+const ingredientHeader = document.querySelector('#ingredient_header');
+const instructionHeader = document.querySelector('#instructions_header');
+// const displayFavoriteButton = document.querySelector('#')
 
+// i want the ingredient header to appear after the search button is clicked
 
-
-
-// let recipe = 'pie'
-const searchBar = document.querySelector('#searchbar')
-const submitButton = searchBar.querySelector('#search-btn')
-let searchInfo = document.querySelector('#search-info')
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
         
@@ -20,7 +21,7 @@ let searchInfo = document.querySelector('#search-info')
     })
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
-    recipe = searchInfo.value
+    recipe = searchInput.value
     // console.log(recipe)
     function removeOld(element, element2) {
         while (element.firstChild) {
@@ -57,6 +58,8 @@ fetch('https://www.themealdb.com/api/json/v1/1/random.php')
 
 function preprocessData(recipeData){
     const substitution = document.querySelector('#substitution');
+    ingredientHeader.textContent = "Ingredients"
+    instructionHeader.textContent = "Instructions"
     if (recipeData.meals === null) {
         substitution.textContent = "This item is not available, here is a random recipe for you!";
     

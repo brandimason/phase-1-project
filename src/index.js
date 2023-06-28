@@ -1,5 +1,6 @@
 let recipeName;
 let recipeImage;
+let recipeCategory
 const instructions = document.querySelector("#instructions");
 const favoriteButton = document.querySelector('#favorite');
 const searchBar = document.querySelector('#searchbar');
@@ -8,6 +9,7 @@ const searchInput = document.querySelector('#search-input');
 const ingredientList = document.querySelector ('#ingredient_list');
 const ingredientHeader = document.querySelector('#ingredient_header');
 const instructionHeader = document.querySelector('#instructions_header');
+
 
     
     favoriteButton.addEventListener('click', () =>{
@@ -20,7 +22,10 @@ const instructionHeader = document.querySelector('#instructions_header');
     })
 
 
-submitButton.addEventListener('mouseover', () =>{
+
+
+    submitButton.addEventListener('mouseover', () =>{
+
         submitButton.style.backgroundColor = "yellow"
         
     })
@@ -31,29 +36,35 @@ submitButton.addEventListener('mouseover', () =>{
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
     recipe = searchInput.value
+    // console.log(recipe)
     function removeOld(element, element2) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
-        } 
+            }
         while (element2.firstChild) {
             element2.removeChild(element2.firstChild)
-        }
+            }
     
-    }
+        }
         favoriteButton.textContent = "♡"
         favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
-})
+       
+    
+        
+        
+
+    })
 
 
-//functions
+
 function fetchFunction(recipe) {
+//console.log(ingredientList)
     fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
         .then(res => res.json())
         .then (data => preprocessData(data))
 }
-
 
 function fetchRandomRecipe(){
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')
@@ -110,34 +121,27 @@ function init(recipeInfo) {
     recipeImage = (recipeInfo.strMealThumb)
     mainimg = document.querySelector('#mainimg')
     mainimg.src = recipeImage
-    mainimg.addEventListener('mouseover', () => {
-        mainimg.style.width= "400"
-        fetchCategory()
-        matchCategory(recipeCategory)
+    // mainimg.addEventListener('mouseover', () => {
+    //     mainimg.style.width= "400"
+    //    fr
+    // })
+  
     
-    })
 
-    // category function
-
-    // function fetchCategory() {
-    //     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-    //         .then(res => res.json())
-    //         .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList)))
-                
-    //     }
-    //     function matchCategory(categoryList, recipeCategory){
-    //         // allCategories.categories.forEach(category => console.log(category))
-    //         console.log(recipeCategory)
-    //         console.log(categoryList)
-    //     //  const match = category.find(categoryList.strCategory => category === recipeCategory)
-    //      categoryDescriptionValue = match.strCategory
-    //      categoryDescription = document.createElement('p')
-    //      categoryDescripton.textContent = categoryDescriptionValue
-    //      categoryDiv = document.querySelector('#descripton')
-    //      categoryDiv.appendChild(categoryDescription)
+    fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+    .then(res => res.json())
+    .then(allCategories => {allCategories.categories.forEach(categoryList => matchCategory(categoryList, recipeCategory))})
         
-    //     }
-    
+    function matchCategory(categoryList, recipeCategory){
+        
+        if (recipeCategory === categoryList.strCategory){
+          const categoryDescription = categoryList.strCategoryDescription        
+        const descriptionDiv = document.querySelector('#description')
+        descriptionDiv.textContent = categoryDescription
+        }
+
+}
+
     
     
 //    console.log(recipeInfo["strIngredient1"])
@@ -179,6 +183,7 @@ function init(recipeInfo) {
 
     }
         listInstructions(recipeInfo)
+        
 }
 //    console.log (listInstructions(recipeInfo))
 
@@ -207,3 +212,4 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.firstChild);
     }
 }
+

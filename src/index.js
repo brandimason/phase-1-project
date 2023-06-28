@@ -1,6 +1,6 @@
 let recipeName;
 let recipeImage;
-let recipeCategory
+let recipeCategory;
 const instructions = document.querySelector("#instructions");
 const favoriteButton = document.querySelector('#favorite');
 const searchBar = document.querySelector('#searchbar');
@@ -9,20 +9,20 @@ const searchInput = document.querySelector('#search-input');
 const ingredientList = document.querySelector ('#ingredient_list');
 const ingredientHeader = document.querySelector('#ingredient_header');
 const instructionHeader = document.querySelector('#instructions_header');
+//const categoryHeader = document.query
 
 
     
     favoriteButton.addEventListener('click', () =>{
     addToFavorites();
     })
-    //not sure if this is working or not
 
     submitButton.addEventListener('click', () =>{
         submitButton.style.backgroundColor = "blue";
     })
 
 
-submitButton.addEventListener('mouseover', () =>{
+    submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
         
     })
@@ -30,23 +30,25 @@ submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "";
         
     })
+
     searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
-    recipe = searchInput.value
-    function removeOld(element, element2) {
-        while (element.firstChild) {
-            element.removeChild(element.firstChild)
-        } 
-        while (element2.firstChild) {
-            element2.removeChild(element2.firstChild)
+        recipe = searchInput.value
+
+        function removeOld(element, element2) {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild)
+            } 
+            while (element2.firstChild) {
+                element2.removeChild(element2.firstChild)
+            }
         }
-    
-    }
+
         favoriteButton.textContent = "♡"
         favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
-})
+    })
 
 
 
@@ -68,8 +70,9 @@ function fetchRandomRecipe(){
 
 function preprocessData(recipeData){
     const substitution = document.querySelector('#substitution');
-    ingredientHeader.textContent = "Ingredients"
-    instructionHeader.textContent = "Instructions"
+    ingredientHeader.textContent = "Ingredients";
+    instructionHeader.textContent = "Instructions";
+    //categoryHeader.textContent = "Category Description";
     if (recipeData.meals === null) {
         substitution.textContent = "This item is not available, here is a random recipe for you!";
         fetchRandomRecipe();
@@ -92,6 +95,7 @@ function displayFirstTenRecipeNames(recipeData){
             favoriteButton.textContent = "♡"
         favorited = false
         })
+
         const textnode = document.createTextNode(recipeData.meals[i].strMeal);
         node.appendChild(textnode);
         document.getElementById("myList").appendChild(node);
@@ -104,61 +108,57 @@ function displayFirstTenRecipeNames(recipeData){
 
 function init(recipeInfo) {
      //defines the default state of the favorite button   
-    recipeName = recipeInfo.strMeal
+    recipeName = recipeInfo.strMeal;
     // recipeCategory = recipeInfo.strCategory
-    const h1recipeName = document.querySelector('#recipeTitle')
-    h1recipeName.textContent = recipeName
+    const h1recipeName = document.querySelector('#recipeTitle');
+    h1recipeName.textContent = recipeName;
 
-    recipeImage = (recipeInfo.strMealThumb)
-    mainimg = document.querySelector('#mainimg')
-    mainimg.src = recipeImage
+    recipeImage = (recipeInfo.strMealThumb);
+    mainimg = document.querySelector('#mainimg');
+    mainimg.src = recipeImage;
     mainimg.addEventListener('mouseover', () => {
         mainimg.style.width= "400"
         fetchCategory()
         matchCategory(recipeCategory)
     
 
-    fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-    .then(res => res.json())
-    .then(allCategories => {allCategories.categories.forEach(categoryList => matchCategory(categoryList, recipeCategory))})
+        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+        .then(res => res.json())
+        .then(allCategories => {allCategories.categories.forEach(categoryList => matchCategory(categoryList, recipeCategory))})
         
-    function matchCategory(categoryList, recipeCategory){
+            function matchCategory(categoryList, recipeCategory){
         
-        if (recipeCategory === categoryList.strCategory){
-          const categoryDescription = categoryList.strCategoryDescription        
-        const descriptionDiv = document.querySelector('#description')
-        descriptionDiv.textContent = categoryDescription
-        }
+                if (recipeCategory === categoryList.strCategory){
+                    const categoryDescription = categoryList.strCategoryDescription        
+                    const descriptionDiv = document.querySelector('#description')
+                    descriptionDiv.textContent = categoryDescription
+                }
 
-}
-
-    
-    
-//    console.log(recipeInfo["strIngredient1"])
-    let ingredientsKeys = []
-    function ingredientsLister(recipeInfo) {
-        for (const key in recipeInfo) {
-            
-            if (key.startsWith("strIngredient") && recipeInfo[key] !== '') {
-                ingredientsKeys.push(recipeInfo[key])
             }
-        }
-    }
-        
+
+
+            let ingredientsKeys = []
+            function ingredientsLister(recipeInfo) {
+                for (const key in recipeInfo) {
+                    if (key.startsWith("strIngredient") && recipeInfo[key] !== '') {
+                    ingredientsKeys.push(recipeInfo[key])
+                    }
+                }
+            }
     
-    ingredientsLister(recipeInfo)
+    
+            ingredientsLister(recipeInfo)
+    })
 
-
-    // console.log(ingredientsKeys)
-    function listIngredients(ingredientsKeys) {
-        removeAllChildNodes(ingredientList);
-        for (let i = 0; i < ingredientsKeys.length; i++){
-            const ingredientItem = ingredientsKeys[i]
-            // console.log(ingredientItem)
-            const ingredientBullet = document.createElement('li')
-            ingredientBullet.textContent = ingredientItem
-            ingredientList.appendChild(ingredientBullet)
-
+        
+        function listIngredients(ingredientsKeys) {
+            removeAllChildNodes(ingredientList);
+                for (let i = 0; i < ingredientsKeys.length; i++){
+                const ingredientItem = ingredientsKeys[i]
+            
+                const ingredientBullet = document.createElement('li')
+                ingredientBullet.textContent = ingredientItem
+                ingredientList.appendChild(ingredientBullet)
         }
     }
         
@@ -169,13 +169,14 @@ function init(recipeInfo) {
         const pInstructions = document.createElement('p')
         pInstructions.textContent = recipeInfo.strInstructions
         instructions.appendChild(pInstructions)
-        // console.log(instructions)
+        
 
     }
-        listInstructions(recipeInfo)
+    
+    listInstructions(recipeInfo)
         
 }
-//    console.log (listInstructions(recipeInfo))
+
 
     
         function addToFavorites() {
@@ -197,9 +198,9 @@ function init(recipeInfo) {
         }
     
 
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
     }
-}
 

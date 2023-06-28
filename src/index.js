@@ -18,51 +18,42 @@ const instructionHeader = document.querySelector('#instructions_header');
     submitButton.addEventListener('click', () =>{
         submitButton.style.backgroundColor = "blue"
     })
-    //when the search button is clicked, it turns blue
 
 
-    submitButton.addEventListener('mouseover', () =>{
+submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
+        
     })
-    //when the button is hovered, it turns yellow
-
-
     submitButton.addEventListener('mouseleave', () =>{
         submitButton.style.backgroundColor = ""
         
     })
-    //when mouse is off of button, goes to default state
-
-
-    searchBar.addEventListener('submit', (e) =>{
+    searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
     recipe = searchInput.value
     function removeOld(element, element2) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
-            }
+        } 
         while (element2.firstChild) {
             element2.removeChild(element2.firstChild)
-            }
-    
         }
+    
+    }
         favoriteButton.textContent = "♡"
         favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
-        
-        
-
-    })
+})
 
 
-
+//functions
 function fetchFunction(recipe) {
-//console.log(ingredientList)
     fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
         .then(res => res.json())
         .then (data => preprocessData(data))
 }
+
 
 function fetchRandomRecipe(){
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')

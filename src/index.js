@@ -1,6 +1,7 @@
 const ingredientList = document.getElementById('ingredientlist')
 let recipeName
 let recipeImage
+let recipeCategory
 let instructions = document.querySelector("#instructions") 
 const favoriteButton = document.querySelector('#favorite')
 favoriteButton.addEventListener('click', () => {
@@ -41,10 +42,22 @@ let searchInfo = document.querySelector('#search-info')
         favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
+        fetchCategory()
         
         
 
     })
+    function fetchCategory() {
+        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+            .then(res => res.json())
+            .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList, recipeCategory)))
+                
+        }
+        function matchCategory(categoryList, recipeCategory){
+            console.log(categoryList, recipeCategory)
+
+        
+        }
 
 
 
@@ -110,28 +123,9 @@ function init(recipeInfo) {
     mainimg.src = recipeImage
     mainimg.addEventListener('mouseover', () => {
         mainimg.style.width= "400"
-        fetchCategory()
-        matchCategory(recipeCategory)
-    
+        return recipeCategory
     })
-    function fetchCategory() {
-        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-            .then(res => res.json())
-            .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList)))
-                
-        }
-        function matchCategory(categoryList, recipeCategory){
-            // allCategories.categories.forEach(category => console.log(category))
-            console.log(recipeCategory)
-            console.log(categoryList)
-        //  const match = category.find(categoryList.strCategory => category === recipeCategory)
-         categoryDescriptionValue = match.strCategory
-         categoryDescription = document.createElement('p')
-         categoryDescripton.textContent = categoryDescriptionValue
-         categoryDiv = document.querySelector('#descripton')
-         categoryDiv.appendChild(categoryDescription)
-        
-        }
+
     
     
     

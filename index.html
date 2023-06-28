@@ -15,22 +15,25 @@
     <div class="container">
       <!-- <section class = "header"> MIGHT NOT NEED -->
          <div class="search-container">
-            <!-- <h1>RECIPES</h1> MIGHT NOT NEED -->
+            <h1>Find a Recipe</h1>
             <form id="searchbar">
-            <input id='search-info' type ="text" placeholder= "Find a recipe" name="search">
-            <button id="search-btn" type="submit">Search</button></form>
+              <input id='search-info' type ="text" placeholder= "" name="search">
+              <button id="search-btn" type="submit">Search</button></form>
+              <ul id="myList">
+              </ul>
 
     
   
     <!-- <section class="maintile"> -->
       <div class = "maintile">
-        <h1 id="recipeTitle">Search a Recipe!</h1>
-        <img id="mainimg" src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg" alt="This is a dish" width ="200" height ="200"/>
+        <h2 id="substitution"></h2>
+        <h2 id="recipeTitle"></h2>
+        <img id="mainimg" src="https://www.printablee.com/postpic/2010/02/printable-cookbook-cover-designs_220998.jpg" alt="This is a dish" width ="200" height ="230"/>
           <div class="ingredient_list"> 
             <button id="favorite">♡</button>
             <h2>Ingredients</h2>
             <ul id="ingredientlist">
-              <p> Yummy ingredients await your search</p>
+              <p> </p>
             </ul>
           </div>
           <h3>Instructions</h3>
@@ -41,6 +44,7 @@
       <div class='favorites_bar'> 
         <h2>Favorite Recipes</h2>  
         </div>
+      <div id="descripton"></div>
   <!-- </section> -->
      <script defer type="text/javascript" src="src/index.js"></script>
   </body>

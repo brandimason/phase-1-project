@@ -7,3 +7,5 @@ fetch(`https://api-ninjas.com/api/recipe?query=${recipeSearch}`, {
     },
     method: 'GET',
 })
+
+Yummy ingredients await your search

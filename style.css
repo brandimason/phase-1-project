@@ -23,14 +23,16 @@ body{
 }
 
 
+
 .search-container input {
     font-size: 1em;
-    padding: 0.6em;
+    /* padding: 0.6em; */
     border: none;
     outline: none;
     border-bottom: 2px solid #202030; 
     margin-bottom: 20px;
 }
+
 
 .search-container button {
     font-size: 1em;
@@ -46,6 +48,7 @@ body{
 .search-container {
     text-align: center;
 }
+
 ul {
     list-style-type: none;
 }
@@ -56,5 +59,5 @@ ul {
     border: none;
     font-weight: 500;
     border-radius: 0.3em;
-    width: 15%;
+    width: 10%;
 }

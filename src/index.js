@@ -1,57 +1,61 @@
-//variables
+lcoet recipe
 let recipeName
 let recipeImage
-const instructions = document.querySelector("#instructions") 
+let instructions = document.querySelector("#instructions") 
 const favoriteButton = document.querySelector('#favorite')
+favoriteButton.addEventListener('click', () => {
+    addToFavorites()})
+
+
+
+
+// let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
-const searchInput = document.querySelector('#search-input')
- 
+let searchInfo = document.querySelector('#search-info')
+    submitButton.addEventListener('click', () =>{
+    submitButton.style.backgroundColor = "blue"
+    })
 
-//event listeners
-favoriteButton.addEventListener('click', () => {
-    addToFavorites()
-})
 
-submitButton.addEventListener('click', () =>{
-        submitButton.style.backgroundColor = "blue"
-})
-
-submitButton.addEventListener('mouseover', () =>{
+    submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
-})
-
-submitButton.addEventListener('mouseleave', () =>{
+        
+    })
+    submitButton.addEventListener('mouseleave', () =>{
         submitButton.style.backgroundColor = ""
-})
- 
-
-searchBar.addEventListener('submit', (e) => {
+        
+    })
+    searchBar.addEventListener('submit', (e) => {
         e.preventDefault()
     recipe = searchInput.value
+    // console.log(recipe)
     function removeOld(element, element2) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
-        } 
+            }
         while (element2.firstChild) {
             element2.removeChild(element2.firstChild)
-        }
+            }
     
-    }
+        }
         favoriteButton.textContent = "♡"
         favorited = false
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
-})
+        
+        
+
+    })
 
 
-//functions
+
 function fetchFunction(recipe) {
+//console.log(ingredientList)
     fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
         .then(res => res.json())
         .then (data => preprocessData(data))
 }
-
 
 function fetchRandomRecipe(){
     fetch('https://www.themealdb.com/api/json/v1/1/random.php')

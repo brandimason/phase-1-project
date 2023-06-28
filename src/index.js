@@ -1,13 +1,22 @@
-const ingredientList = document.getElementById('ingredientlist')
 let recipeName
 let recipeImage
 let instructions = document.querySelector("#instructions") 
+const favoriteButton = document.querySelector('#favorite')
+favoriteButton.addEventListener('click', () => {
+    addToFavorites()})
 
-// i want the ingredient header to appear after the search button is clicked
 
+
+
+// let recipe = 'pie'
+const searchBar = document.querySelector('#searchbar')
+const submitButton = searchBar.querySelector('#search-btn')
+let searchInfo = document.querySelector('#search-info')
     submitButton.addEventListener('click', () =>{
     submitButton.style.backgroundColor = "blue"
     })
+
+
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
         

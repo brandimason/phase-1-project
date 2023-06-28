@@ -1,11 +1,12 @@
 let recipeName
 let recipeImage
-let instructions = document.querySelector("#instructions") 
+const instructions = document.querySelector("#instructions") 
+const searchInfo = document.querySelector('#search-info')
 const ingredientList = document.getElementById('ingredientlist')
 const favoriteButton = document.querySelector('#favorite')
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
-let searchInfo = document.querySelector('#search-info')
+
 
 
 

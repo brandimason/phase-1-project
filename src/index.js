@@ -20,10 +20,12 @@ const instructionHeader = document.querySelector('#instructions_header');
     submitButton.addEventListener('click', () =>{
         submitButton.style.backgroundColor = "blue"
     })
-    //when the search button is clicked, it turns blue
+
+
 
 
     submitButton.addEventListener('mouseover', () =>{
+
         submitButton.style.backgroundColor = "yellow"
         
     })
@@ -125,6 +127,7 @@ function init(recipeInfo) {
     // })
   
     
+
     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
     .then(res => res.json())
     .then(allCategories => {allCategories.categories.forEach(categoryList => matchCategory(categoryList, recipeCategory))})
@@ -138,6 +141,7 @@ function init(recipeInfo) {
         }
 
 }
+
     
     
 //    console.log(recipeInfo["strIngredient1"])

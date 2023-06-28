@@ -1,19 +1,16 @@
 let recipeName
 let recipeImage
-let instructions = document.querySelector("#instructions") 
+const instructions = document.querySelector("#instructions") 
 const favoriteButton = document.querySelector('#favorite')
-favoriteButton.addEventListener('click', () => {
-    addToFavorites()})
-
-
-
-
-// let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
-let searchInfo = document.querySelector('#search-info')
+const searchInfo = document.querySelector('#search-info')
+    
+    favoriteButton.addEventListener('click', () => {
+    addToFavorites()})
+
     submitButton.addEventListener('click', () =>{
-    submitButton.style.backgroundColor = "blue"
+        submitButton.style.backgroundColor = "blue"
     })
 
 

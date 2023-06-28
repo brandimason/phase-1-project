@@ -11,40 +11,40 @@ const instructionHeader = document.querySelector('#instructions_header');
 
     
     favoriteButton.addEventListener('click', () =>{
-    addToFavorites()
+    addToFavorites();
     })
     //not sure if this is working or not
 
     submitButton.addEventListener('click', () =>{
-        submitButton.style.backgroundColor = "blue"
+        submitButton.style.backgroundColor = "blue";
     })
 
 
-submitButton.addEventListener('mouseover', () =>{
-        submitButton.style.backgroundColor = "yellow"
+    submitButton.addEventListener('mouseover', () =>{
+        submitButton.style.backgroundColor = "yellow";
         
     })
     submitButton.addEventListener('mouseleave', () =>{
-        submitButton.style.backgroundColor = ""
+        submitButton.style.backgroundColor = "";
         
     })
     searchBar.addEventListener('submit', (e) => {
-        e.preventDefault()
-    recipe = searchInput.value
-    function removeOld(element, element2) {
-        while (element.firstChild) {
-            element.removeChild(element.firstChild)
-        } 
-        while (element2.firstChild) {
-            element2.removeChild(element2.firstChild)
+        e.preventDefault();
+    recipe = searchInput.value;
+        function removeOld(element, element2) {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild)
+            } 
+            while (element2.firstChild) {
+                element2.removeChild(element2.firstChild)
+            }
         }
-    
-    }
+
         favoriteButton.textContent = "♡"
-        favorited = false
-        removeOld(ingredientList, instructions)
-        fetchFunction(recipe)
-})
+        favorited = false;
+        removeOld(ingredientList, instructions);
+        fetchFunction(recipe);
+    })
 
 
 //functions
@@ -63,13 +63,13 @@ function fetchRandomRecipe(){
 }
 
 
+
 function preprocessData(recipeData){
     const substitution = document.querySelector('#substitution');
     ingredientHeader.textContent = "Ingredients"
     instructionHeader.textContent = "Instructions"
     if (recipeData.meals === null) {
         substitution.textContent = "This item is not available, here is a random recipe for you!";
-    
         fetchRandomRecipe();
     } else {
         substitution.textContent = "";
@@ -103,7 +103,7 @@ function displayFirstTenRecipeNames(recipeData){
 function init(recipeInfo) {
      //defines the default state of the favorite button   
     recipeName = recipeInfo.strMeal
-    recipeCategory = recipeInfo.strCategory
+    // recipeCategory = recipeInfo.strCategory
     const h1recipeName = document.querySelector('#recipeTitle')
     h1recipeName.textContent = recipeName
 
@@ -111,9 +111,9 @@ function init(recipeInfo) {
     mainimg = document.querySelector('#mainimg')
     mainimg.src = recipeImage
     mainimg.addEventListener('mouseover', () => {
-        mainimg.style.width= "400"
-        fetchCategory()
-        matchCategory(recipeCategory)
+    mainimg.style.width= "400"
+        // fetchCategory()
+        // matchCategory(recipeCategory)
     
     })
 
@@ -147,10 +147,9 @@ function init(recipeInfo) {
             
             if (key.startsWith("strIngredient") && recipeInfo[key] !== '') {
                 ingredientsKeys.push(recipeInfo[key])
-              }
-            //   console.log(ingredientsKeys)
             }
         }
+    }
         
     
     ingredientsLister(recipeInfo)
@@ -166,9 +165,10 @@ function init(recipeInfo) {
             ingredientBullet.textContent = ingredientItem
             ingredientList.appendChild(ingredientBullet)
 
-            }
         }
-        listIngredients(ingredientsKeys)
+    }
+        
+    listIngredients(ingredientsKeys)
 
     function listInstructions (recipeInfo){
         removeAllChildNodes(document.querySelector("#instructions"))

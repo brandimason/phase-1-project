@@ -1,31 +1,42 @@
-let recipeName
-let recipeImage
-const instructions = document.querySelector("#instructions") 
-const favoriteButton = document.querySelector('#favorite')
-const searchBar = document.querySelector('#searchbar')
-const submitButton = searchBar.querySelector('#search-btn')
-const searchInfo = document.querySelector('#search-info')
+let recipeName;
+let recipeImage;
+const instructions = document.querySelector("#instructions");
+const favoriteButton = document.querySelector('#favorite');
+const searchBar = document.querySelector('#searchbar');
+const submitButton = searchBar.querySelector('#search-btn');
+const searchInput = document.querySelector('#search-input');
+const ingredientList = document.querySelector ('#ingredient_list');
+const ingredientHeader = document.querySelector('#ingredient_header');
+const instructionHeader = document.querySelector('#instructions_header');
+
     
-    favoriteButton.addEventListener('click', () => {
-    addToFavorites()})
+    favoriteButton.addEventListener('click', () =>{
+    addToFavorites()
+    })
+    //not sure if this is working or not
 
     submitButton.addEventListener('click', () =>{
         submitButton.style.backgroundColor = "blue"
     })
+    //when the search button is clicked, it turns blue
 
 
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
-        
     })
+    //when the button is hovered, it turns yellow
+
+
     submitButton.addEventListener('mouseleave', () =>{
         submitButton.style.backgroundColor = ""
         
     })
-    searchBar.addEventListener('submit', (e) => {
+    //when mouse is off of button, goes to default state
+
+
+    searchBar.addEventListener('submit', (e) =>{
         e.preventDefault()
     recipe = searchInput.value
-    // console.log(recipe)
     function removeOld(element, element2) {
         while (element.firstChild) {
             element.removeChild(element.firstChild)
@@ -114,24 +125,27 @@ function init(recipeInfo) {
         matchCategory(recipeCategory)
     
     })
-    function fetchCategory() {
-        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
-            .then(res => res.json())
-            .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList)))
+
+    // category function
+
+    // function fetchCategory() {
+    //     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+    //         .then(res => res.json())
+    //         .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList)))
                 
-        }
-        function matchCategory(categoryList, recipeCategory){
-            // allCategories.categories.forEach(category => console.log(category))
-            console.log(recipeCategory)
-            console.log(categoryList)
-        //  const match = category.find(categoryList.strCategory => category === recipeCategory)
-         categoryDescriptionValue = match.strCategory
-         categoryDescription = document.createElement('p')
-         categoryDescripton.textContent = categoryDescriptionValue
-         categoryDiv = document.querySelector('#descripton')
-         categoryDiv.appendChild(categoryDescription)
+    //     }
+    //     function matchCategory(categoryList, recipeCategory){
+    //         // allCategories.categories.forEach(category => console.log(category))
+    //         console.log(recipeCategory)
+    //         console.log(categoryList)
+    //     //  const match = category.find(categoryList.strCategory => category === recipeCategory)
+    //      categoryDescriptionValue = match.strCategory
+    //      categoryDescription = document.createElement('p')
+    //      categoryDescripton.textContent = categoryDescriptionValue
+    //      categoryDiv = document.querySelector('#descripton')
+    //      categoryDiv.appendChild(categoryDescription)
         
-        }
+    //     }
     
     
     

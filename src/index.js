@@ -42,21 +42,23 @@ let searchInfo = document.querySelector('#search-info')
         removeOld(ingredientList, instructions)
         fetchFunction(recipe)
         
+        
 
     })
 
 
+
 function fetchFunction(recipe) {
 //console.log(ingredientList)
-fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
-    .then(res => res.json())
-    .then (data => preprocessData(data))
+    fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
+        .then(res => res.json())
+        .then (data => preprocessData(data))
 }
 
 function fetchRandomRecipe(){
-fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-    .then(res => res.json())
-    .then(allRandomRecipes => init(allRandomRecipes.meals[0]))
+    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+        .then(res => res.json())
+        .then(allRandomRecipes => init(allRandomRecipes.meals[0]))
 
 }
 
@@ -77,11 +79,11 @@ function preprocessData(recipeData){
 function displayFirstTenRecipeNames(recipeData){
     removeAllChildNodes(document.querySelector("#myList"));
     for (i = 0; i < Math.min(recipeData.meals.length, 10); i++) {
-        console.log(recipeData.meals[i]);
+        (recipeData.meals[i]);
         const node = document.createElement("li");
         node.setAttribute('idx', i.toString());
         node.addEventListener('click', ()=> {
-            console.log(node.getAttribute("idx"));
+            (node.getAttribute("idx"));
             init(recipeData.meals[parseInt(node.getAttribute("idx"))]);
             favoriteButton.textContent = "♡"
         favorited = false
@@ -93,10 +95,13 @@ function displayFirstTenRecipeNames(recipeData){
     }
 
 }
+ 
+
 
 function init(recipeInfo) {
      //defines the default state of the favorite button   
     recipeName = recipeInfo.strMeal
+    recipeCategory = recipeInfo.strCategory
     const h1recipeName = document.querySelector('#recipeTitle')
     h1recipeName.textContent = recipeName
 
@@ -105,8 +110,31 @@ function init(recipeInfo) {
     mainimg.src = recipeImage
     mainimg.addEventListener('mouseover', () => {
         mainimg.style.width= "400"
-
+        fetchCategory()
+        matchCategory(recipeCategory)
+    
     })
+    function fetchCategory() {
+        fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+            .then(res => res.json())
+            .then(allCategories => allCategories.categories.forEach(categoryList => matchCategory(categoryList)))
+                
+        }
+        function matchCategory(categoryList, recipeCategory){
+            // allCategories.categories.forEach(category => console.log(category))
+            console.log(recipeCategory)
+            console.log(categoryList)
+        //  const match = category.find(categoryList.strCategory => category === recipeCategory)
+         categoryDescriptionValue = match.strCategory
+         categoryDescription = document.createElement('p')
+         categoryDescripton.textContent = categoryDescriptionValue
+         categoryDiv = document.querySelector('#descripton')
+         categoryDiv.appendChild(categoryDescription)
+        
+        }
+    
+    
+    
 //    console.log(recipeInfo["strIngredient1"])
     let ingredientsKeys = []
     function ingredientsLister(recipeInfo) {
@@ -118,8 +146,10 @@ function init(recipeInfo) {
             //   console.log(ingredientsKeys)
             }
         }
+        
     
     ingredientsLister(recipeInfo)
+
 
     // console.log(ingredientsKeys)
     function listIngredients(ingredientsKeys) {
@@ -144,14 +174,10 @@ function init(recipeInfo) {
 
     }
         listInstructions(recipeInfo)
+}
 //    console.log (listInstructions(recipeInfo))
 
     
-        
-
-       
-            
-        }
         function addToFavorites() {
             
             favorited = !favorited

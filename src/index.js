@@ -1,21 +1,24 @@
-const ingredientList = document.getElementById('ingredientlist')
 let recipeName
 let recipeImage
 let instructions = document.querySelector("#instructions") 
+const ingredientList = document.getElementById('ingredientlist')
 const favoriteButton = document.querySelector('#favorite')
-favoriteButton.addEventListener('click', () => {
-    addToFavorites()})
-
-
-
-
-// let recipe = 'pie'
 const searchBar = document.querySelector('#searchbar')
 const submitButton = searchBar.querySelector('#search-btn')
 let searchInfo = document.querySelector('#search-info')
+
+
+
+
+    favoriteButton.addEventListener('click', () => {
+        addToFavorites()})
+
+
     submitButton.addEventListener('click', () =>{
     submitButton.style.backgroundColor = "blue"
     })
+
+
     submitButton.addEventListener('mouseover', () =>{
         submitButton.style.backgroundColor = "yellow"
         

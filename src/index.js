@@ -50,13 +50,49 @@ function fetchFunction(recipe) {
 //console.log(ingredientList)
 fetch (`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipe}`)
     .then(res => res.json())
-    .then (data => init(data))
+    .then (data => preprocessData(data))
 }
 
-function init(recipeData) {
-     //defines the default state of the favorite button
-    recipeInfo = recipeData.meals[0]
-    recipeName = (recipeInfo.strMeal)
+function fetchRandomRecipe(){
+fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+    .then(res => res.json())
+    .then(allRandomRecipes => init(allRandomRecipes.meals[0]))
+}
+
+
+function preprocessData(recipeData){
+    const substitution = document.querySelector('#substitution');
+    if (recipeData.meals === null) {
+        substitution.textContent = "This item is not available, here is a random recipe for you!";
+    
+        fetchRandomRecipe();
+    } else {
+        substitution.textContent = "";
+        displayFirstTenRecipeNames(recipeData);
+        init(recipeData.meals[0]);
+    }
+}
+
+function displayFirstTenRecipeNames(recipeData){
+    removeAllChildNodes(document.querySelector("#myList"));
+    for (i = 0; i < Math.min(recipeData.meals.length, 10); i++) {
+        console.log(recipeData.meals[i]);
+        const node = document.createElement("li");
+        node.setAttribute('idx', i.toString());
+        node.addEventListener('click', ()=> {
+            console.log(node.getAttribute("idx"));
+            init(recipeData.meals[parseInt(node.getAttribute("idx"))]);
+        })
+        const textnode = document.createTextNode(recipeData.meals[i].strMeal);
+        node.appendChild(textnode);
+        document.getElementById("myList").appendChild(node);
+    }
+
+}
+
+function init(recipeInfo) {
+     //defines the default state of the favorite button   
+    recipeName = recipeInfo.strMeal
     const h1recipeName = document.querySelector('#recipeTitle')
     h1recipeName.textContent = recipeName
 
@@ -83,6 +119,7 @@ function init(recipeData) {
 
     // console.log(ingredientsKeys)
     function listIngredients(ingredientsKeys) {
+        removeAllChildNodes(ingredientList);
         for (let i = 0; i < ingredientsKeys.length; i++){
             const ingredientItem = ingredientsKeys[i]
             // console.log(ingredientItem)
@@ -95,7 +132,8 @@ function init(recipeData) {
         listIngredients(ingredientsKeys)
 
     function listInstructions (recipeInfo){
-      const pInstructions = document.createElement('p')
+        removeAllChildNodes(document.querySelector("#instructions"))
+        const pInstructions = document.createElement('p')
         pInstructions.textContent = recipeInfo.strInstructions
         instructions.appendChild(pInstructions)
         // console.log(instructions)
@@ -129,4 +167,8 @@ function init(recipeData) {
         }
     
 
-       
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}

@@ -57,6 +57,7 @@ function fetchRandomRecipe(){
 fetch('https://www.themealdb.com/api/json/v1/1/random.php')
     .then(res => res.json())
     .then(allRandomRecipes => init(allRandomRecipes.meals[0]))
+
 }
 
 
@@ -82,10 +83,13 @@ function displayFirstTenRecipeNames(recipeData){
         node.addEventListener('click', ()=> {
             console.log(node.getAttribute("idx"));
             init(recipeData.meals[parseInt(node.getAttribute("idx"))]);
+            favoriteButton.textContent = "♡"
+        favorited = false
         })
         const textnode = document.createTextNode(recipeData.meals[i].strMeal);
         node.appendChild(textnode);
         document.getElementById("myList").appendChild(node);
+        
     }
 
 }
@@ -100,7 +104,7 @@ function init(recipeInfo) {
     mainimg = document.querySelector('#mainimg')
     mainimg.src = recipeImage
     mainimg.addEventListener('mouseover', () => {
-        mainimg.with= "400"
+        mainimg.style.width= "400"
 
     })
 //    console.log(recipeInfo["strIngredient1"])

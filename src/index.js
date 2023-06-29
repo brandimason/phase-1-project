@@ -1,3 +1,4 @@
+//variables
 let recipeName;
 let recipeImage;
 let recipeCategory;
@@ -20,7 +21,7 @@ submitButton.addEventListener('click', () =>{
 
 
 submitButton.addEventListener('mouseover', () =>{
-    submitButton.style.backgroundColor = "yellow"
+    submitButton.style.backgroundColor = "yellow";
     
 })
 submitButton.addEventListener('mouseleave', () =>{
@@ -29,22 +30,22 @@ submitButton.addEventListener('mouseleave', () =>{
 })
 
 searchBar.addEventListener('submit', (e) => {
-    e.preventDefault()
-    recipe = searchInput.value
+    e.preventDefault();
+    recipe = searchInput.value;
 
     function removeOld(element, element2) {
         while (element.firstChild) {
-            element.removeChild(element.firstChild)
+            element.removeChild(element.firstChild);
         } 
         while (element2.firstChild) {
-            element2.removeChild(element2.firstChild)
+            element2.removeChild(element2.firstChild);
         }
     }
 
-    favoriteButton.textContent = "♡"
-    favorited = false
-    removeOld(ingredientList, instructions)
-    fetchFunction(recipe)
+    favoriteButton.textContent = "♡";
+    favorited = false;
+    removeOld(ingredientList, instructions);
+    fetchFunction(recipe);
 })
 
 //fetchs for data
@@ -70,7 +71,7 @@ function preprocessData(recipeData){
     const substitution = document.querySelector('#substitution');
     ingredientHeader.textContent = "Ingredients";
     instructionHeader.textContent = "Instructions";
-    //categoryHeader.textContent = "Category Description";
+    document.querySelector('#category_description').textContent = "Category Description";
     if (recipeData.meals === null) {
         substitution.textContent = "This item is not available, here is a random recipe for you!";
         fetchRandomRecipe();
@@ -90,8 +91,8 @@ function displayFirstTenRecipeNames(recipeData){
         node.addEventListener('click', ()=> {
             (node.getAttribute("idx"));
             init(recipeData.meals[parseInt(node.getAttribute("idx"))]);
-            favoriteButton.textContent = "♡"
-        favorited = false
+            favoriteButton.textContent = "♡";
+        favorited = false;
         })
 
         const textnode = document.createTextNode(recipeData.meals[i].strMeal);
@@ -103,7 +104,7 @@ function displayFirstTenRecipeNames(recipeData){
 function init(recipeInfo) {
      //defines the default state of the favorite button   
     recipeName = recipeInfo.strMeal;
-    recipeCategory = recipeInfo.strCategory
+    recipeCategory = recipeInfo.strCategory;
     const h1recipeName = document.querySelector('#recipeTitle');
     h1recipeName.textContent = recipeName;
 
@@ -111,28 +112,27 @@ function init(recipeInfo) {
     mainimg = document.querySelector('#mainimg');
     mainimg.src = recipeImage;
 
-    let ingredientsKeys = ingredientsLister(recipeInfo)
+    let ingredientsKeys = ingredientsLister(recipeInfo);
 
-    listIngredients(ingredientsKeys)
+    listIngredients(ingredientsKeys);
 
-    listInstructions(recipeInfo)    
+    listInstructions(recipeInfo);
 
     fetchRecipeCategory();
 }
 
 function addToFavorites() {
-    favorited = !favorited
+    favorited = !favorited;
     if (favorited === true) {
-        favoriteButton.textContent = "❤️"
+        favoriteButton.textContent = "❤️";
     }
-    let favoriteSection = document.querySelector('.favorites_bar')
-    let favoriteTitle = document.createElement('p')
-    favoriteTitle.textContent = recipeName
-    // favoriteSection.appendChild(favoriteTitle)
-    let favoriteImage = document.createElement('img')
+    let favoriteSection = document.querySelector('.favorites_bar');
+    let favoriteTitle = document.createElement('p');
+    favoriteTitle.textContent = recipeName;
+    let favoriteImage = document.createElement('img');
     favoriteImage.style.width = "150px";
-    favoriteImage.src = recipeImage
-    favoriteSection.append(favoriteImage, favoriteTitle) 
+    favoriteImage.src = recipeImage;
+    favoriteSection.append(favoriteImage, favoriteTitle);
 }
 
 function removeAllChildNodes(parent) {
@@ -145,7 +145,7 @@ function ingredientsLister(recipeInfo) {
     let ingredientsKeys = [];
     for (const key in recipeInfo) {
         if (key.startsWith("strIngredient") && recipeInfo[key] !== '') {
-        ingredientsKeys.push(recipeInfo[key])
+        ingredientsKeys.push(recipeInfo[key]);
         }
     }
     return ingredientsKeys;
@@ -154,24 +154,24 @@ function ingredientsLister(recipeInfo) {
 function listIngredients(ingredientsKeys) {
     removeAllChildNodes(ingredientList);
     for (let i = 0; i < ingredientsKeys.length; i++){
-        const ingredientItem = ingredientsKeys[i]
-        const ingredientBullet = document.createElement('li')
-        ingredientBullet.textContent = ingredientItem
-        ingredientList.appendChild(ingredientBullet)
+        const ingredientItem = ingredientsKeys[i];
+        const ingredientBullet = document.createElement('li');
+        ingredientBullet.textContent = ingredientItem;
+        ingredientList.appendChild(ingredientBullet);
     }
 }
 
 function listInstructions (recipeInfo){
-    removeAllChildNodes(document.querySelector("#instructions"))
-    const pInstructions = document.createElement('p')
-    pInstructions.textContent = recipeInfo.strInstructions
-    instructions.appendChild(pInstructions)
+    removeAllChildNodes(document.querySelector("#instructions"));
+    const pInstructions = document.createElement('p');
+    pInstructions.textContent = recipeInfo.strInstructions;
+    instructions.appendChild(pInstructions);
 }
 
 function matchCategory(categoryList, recipeCategory){
     if (recipeCategory === categoryList.strCategory){
-        const categoryDescription = categoryList.strCategoryDescription        
-        const descriptionDiv = document.querySelector('#description')
-        descriptionDiv.textContent = categoryDescription
+        const categoryDescription = categoryList.strCategoryDescription;    
+        const descriptionDiv = document.querySelector('#description');
+        descriptionDiv.textContent = categoryDescription;
     }
 }

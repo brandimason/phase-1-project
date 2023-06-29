@@ -16,12 +16,12 @@ addToFavorites();
 })
 
 submitButton.addEventListener('click', () =>{
-    submitButton.style.backgroundColor = "blue";
+    submitButton.style.backgroundColor = "#1F45FC";
 })
 
 
 submitButton.addEventListener('mouseover', () =>{
-    submitButton.style.backgroundColor = "yellow";
+    submitButton.style.backgroundColor = "#FAF884";
     
 })
 submitButton.addEventListener('mouseleave', () =>{

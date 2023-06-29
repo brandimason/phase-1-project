@@ -62,3 +62,14 @@ ul {
     border-radius: 0.3em;
     width: 10%;
 }
+
+.maintile h2:first-of-type {
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+#myList:hover{
+    cursor: pointer;
+    /* color: #1F45FC;
+    text-decoration: underline; */
+}

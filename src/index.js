@@ -12,6 +12,7 @@ const ingredientHeader = document.querySelector('#ingredient_header');
 const instructionHeader = document.querySelector('#instructions_header');
 
 favoriteButton.addEventListener('click', () =>{
+processFavoriteData();
 addToFavorites();
 })
 
@@ -68,10 +69,14 @@ function fetchRecipeCategory() {
 }
 
 function preprocessData(recipeData){
+    removeAllChildNodes(document.querySelector("#myList"));
     const substitution = document.querySelector('#substitution');
     ingredientHeader.textContent = "Ingredients";
     instructionHeader.textContent = "Instructions";
     document.querySelector('#category_description').textContent = "Category Description";
+    // displaying favorite button
+    document.querySelector('#favorite').textContent = ('♡')
+
     if (recipeData.meals === null) {
         substitution.textContent = "This item is not available, here is a random recipe for you!";
         fetchRandomRecipe();
@@ -80,6 +85,17 @@ function preprocessData(recipeData){
         displayFirstTenRecipeNames(recipeData);
         init(recipeData.meals[0]);
     }
+}
+
+function processFavoriteData() {
+    if (!(document.querySelector("#favHeader"))) {
+        //displaying favorites bar once button is clicked
+       let favoriteSection = document.querySelector('.favorites_bar');
+       const addFavHeader = document.createElement('h2');
+       addFavHeader.id = "favHeader";
+       addFavHeader.textContent = "Favorite Recipe";
+       favoriteSection.append(addFavHeader);
+    } else return
 }
 
 function displayFirstTenRecipeNames(recipeData){
